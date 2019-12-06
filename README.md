@@ -10,6 +10,7 @@ clone the repository with git:<br>
 <code>git clone https://github.com/taperj/teloscoin-tor</code><br>
 Change directory to the root of the project:<br>
 <code>cd teloscoin-tor</code><br>
+Run the installer<br>
 <code>sudo ./install.sh</code><br>
 
 
@@ -22,6 +23,12 @@ torpassword in transcendence.conf is set to "decentralization" and should be cha
 
 Make sure to allow port 8051/tcp in your hosts firewall(not within the container), this can usually be accomplished with:<br>
 sudo ufw allow 8051/tcp<br>
+<br>
+Was this a helpful installer?<br>
+feel free to drop me a tip..<br>
+BTC: 3HLx5AMe9S5SWzVqLwAib3oyGZm5nAAWKe<br>
+TELOS: GPbuPVWKMKBYghszKi8N2iBCJgufmu3Li2<br>
+<br>
 <br>
 <b>Relevant links:</b><br>
 <b>S6-INIT:</b> https://skarnet.org/software/s6/ <br>
