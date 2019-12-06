@@ -4,9 +4,6 @@ RUN apt-get update \
 	&&    apt-get install curl wget unzip -y \
 	&&    curl --fail --silent -L https://github.com/just-containers/s6-overlay/releases/download/v1.21.8.0/s6-overlay-amd64.tar.gz | tar xzvf - -C / \
 	&&    apt-get install -y sudo tor \
-	#&&    add-apt-repository -y ppa:bitcoin/bitcoin \
-	#&&    apt-get update \
-	#&&    apt-get install -y libdb4.8 libdb4.8++ \
 	&&    mkdir -v /home/debian-tor \
 	&&    chown -v debian-tor:debian-tor /home/debian-tor \
 	&&    chmod -v 750 /home/debian-tor \
