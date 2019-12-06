@@ -2,7 +2,7 @@
 ####################################################
 # TELOSCOIN MASTERNODE INSTALLER WITH TOR          #
 #                                                  #
-#  https://github.com/taperj/telos-tor           #
+#  https://github.com/taperj/teloscoin-tor         #
 #                                                  #
 #  V. 0.0.1                                        #
 #                                                  #
