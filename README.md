@@ -24,8 +24,7 @@ torpassword in transcendence.conf is set to "decentralization" and should be cha
 Make sure to allow port 8051/tcp in your hosts firewall(not within the container), this can usually be accomplished with:<br>
 sudo ufw allow 8051/tcp<br>
 <br>
-Was this a helpful installer?<br>
-feel free to drop me a tip..<br>
+Tips for the developer:<br>
 BTC: 3HLx5AMe9S5SWzVqLwAib3oyGZm5nAAWKe<br>
 TELOS: GPbuPVWKMKBYghszKi8N2iBCJgufmu3Li2<br>
 <br>
