@@ -13,7 +13,6 @@ Change directory to the root of the project:<br>
 Run the installer<br>
 <code>sudo ./install.sh</code><br>
 
-
 torpassword in transcendence.conf is set to "decentralization" and should be changed to whatever you change the Tor controller password to in the follwing step. Note that you can build and use as is, it has been configured to work but it is highly suggested that you take the time to edit the Dockerfile and transcendence.conf changing the tor control password prior to build, or after build once the container is deployed. I have added the following instructions are in the Dockerfile to guide you:
      
 #Hashed Password is "decentralization" change this with tor --hash-password \<yournewpassword\><br>
@@ -21,10 +20,11 @@ torpassword in transcendence.conf is set to "decentralization" and should be cha
 #new password in plain text, not hashed.<br>
 &&    echo "HashedControlPassword 16:C7F40C06065809EE60D5C0B9086D2BDF88F32495CD1AE06E4571CB8212" >> /etc/tor/torrc \
 
-Make sure to allow port 8051/tcp in your hosts firewall(not within the container), this can usually be accomplished with:<br>
+Make sure to allow port 8051/tcp(or whatever port you specify to run the masternode on in the installer) in your hosts firewall(not within the container), this can usually be accomplished with:<br>
 sudo ufw allow 8051/tcp<br>
 <br>
-Tips for the developer:<br>
+Was this a helpful installer?<br>
+feel free to drop me a tip..<br>
 BTC: 3HLx5AMe9S5SWzVqLwAib3oyGZm5nAAWKe<br>
 TELOS: GPbuPVWKMKBYghszKi8N2iBCJgufmu3Li2<br>
 <br>
