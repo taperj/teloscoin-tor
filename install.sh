@@ -160,7 +160,7 @@ sleep 4
 docker ps
 printf "${GREEN}INSTALLATION COMPLETE.${NC}\n"
 printf "${YELLOW}ONCE SYNCED YOU CAN GET THE TOR(onion) ADDRESS TO ADD TO YOUR COLD WALLET masternode.conf as server address with:${NC}\n"
-printf "${WHITE}$ sudo docker container exec apr-tor grep AddLocal /home/transcendence/.transcendence/debug.log${NC}\n"
+printf "${WHITE}$ sudo docker container exec telos-tor-$PORTNUMBER grep AddLocal /home/transcendence/.transcendence/debug.log${NC}\n"
 printf "${YELLOW}THE ABOVE COMMAND SHOULD OUTPUT SOMETHING LIKE THIS EXAMPLE OUTPUT:${NC}\n"
 printf "${WHITE}2019-11-24 02:33:16 AddLocal(zsddfken27kdsdx.onion:$PORTNUMBER,4)${NC}\n"
 printf "${YELLOW}in this example you would add ${GREEN}zsddfken27kdsdx.onion:$PORTNUMBER${YELLOW} to your cold wallet masternode.conf as ip addr for this alias. Yours will be different than the example.${NC}\n"
