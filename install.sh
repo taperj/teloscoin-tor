@@ -4,7 +4,7 @@
 #                                                  #
 #  https://github.com/taperj/teloscoin-tor         #
 #                                                  #
-#  V. 0.0.1                                        #
+#  V. 0.0.2                                        #
 #                                                  #
 #  By: taperj                                      #
 #                                                  #
@@ -32,13 +32,54 @@ printf "${RED}******************************************************************
 #
 #Get install info:
 #
-printf "${WHITE}Enter the masternode privkey and hit enter:${NC}"
+printf "${WHITE}Enter the masternode privkey and hit enter:${NC}\n"
 read MASTERNODEPRIVKEY
-printf "${WHITE}Enter the masternode's ip address and hit enter:${NC}"
+#
+#
+#Get masternode's public ip
+#
+printf "${WHITE}Detecting Public IP..."
+#
+#Check for cURL
+if ! [ -x "$(command -v curl)" ]; then
+        printf "${RED}cURL is not detected or not executable.${GREEN} Installing cURL.${NC}\n"
+        apt-get -y install curl
+fi
+#
+PUBLICIP=$(curl -s ifconfig.me)
+printf "${GREEN}Public IP detected is: $PUBLICIP${NC}\n"
+#
+printf "${WHITE}Enter the ip you would like to use for the masternode and hit enter:${NC}\n"
 read MASTERNODEADDR
-printf "${WHITE}Enter a username for RPC:${NC}"
+#
+#
+#Port specification
+#make sure not to conflict with tor on 9050 and 9051
+#
+printf "${WHITE}Enter the port number you'd like transcendenced to listen on, default Port 8051 will be used if no port specified.${NC}\n"
+read PORTNUMBER
+
+if [ "$PORTNUMBER" != "" ]
+  then
+        if [ "$PORTNUMBER" = "9050" ] || [ "$PORTNUMBER" = "9051" ]
+                then
+                        printf "${RED}Port $PORTNUMBER specified in user input. $PORTNUMBER is reserved for Tor. Exiting.${NC}\n"
+                        printf "${RED}PLEASE RE-RUN THE SCRIPT SELECTING A DIFFERENT PORT.${NC}\n"
+                        exit
+        fi
+          printf "${YELLOW}Port $PORTNUMBER specified in user input. Port $PORTNUMBER will be configured.${NC}\n"
+  else
+          printf "${YELLOW}No port number specified. Default Port 8051 will be used.${NC}\n"
+          PORTNUMBER=8051
+fi
+
+#
+#
+#RPC
+#
+printf "${WHITE}Enter a username for RPC:${NC}\n"
 read RPCUSER
-printf "${WHITE}Enter a password for RPC:${NC}"
+printf "${WHITE}Enter a password for RPC:${NC}\n"
 read RPCPASSWORD
 printf "${WHITE}SANITY CHECK...${NC}\n"
 #
@@ -92,32 +133,38 @@ sed -i "s/masternodeprivkey=/masternodeprivkey=$MASTERNODEPRIVKEY/g" transcenden
 sed -i "s/masternodeaddr=/masternodeaddr=$MASTERNODEADDR/g" transcendence.conf
 sed -i "s/rpcuser=/rpcuser=$RPCUSER/g" transcendence.conf
 sed -i "s/rpcpassword=/rpcpassword=$RPCPASSWORD/g" transcendence.conf
+sed -i "s/port=/port=$PORTNUMBER/g" transcendence.conf
+#
+#
+#Edit Dockerfile
+printf "${YELLOW}Editing Dockerfile...${NC}\n"
+sed -i "s/HiddenServicePort 8051 127.0.0.1:8051/HiddenServicePort $PORTNUMBER 127.0.0.1:$PORTNUMBER/g" Dockerfile
 #
 #
 #Build image
 #
 printf "${YELLOW}Building docker image telos-tor...${NC}\n"
-docker build -t telos-tor .
+docker build -t telos-tor-$PORTNUMBER .
 #
 #Create container
 #
 printf "${YELLOW}Creating container telos-tor...${NC}\n"
-docker create --name telos-tor --restart=always -p 8051:8051 telos-tor:latest
+docker create --name telos-tor-$PORTNUMBER --restart=always -p $PORTNUMBER:$PORTNUMBER telos-tor-$PORTNUMBER:latest
 #
 #
 #Start container
 #
 printf "${YELLOW}Starting container telos-tor...${NC}\n"
-docker container start telos-tor
+docker container start telos-tor-$PORTNUMBER
 sleep 4
 docker ps
 printf "${GREEN}INSTALLATION COMPLETE.${NC}\n"
 printf "${YELLOW}ONCE SYNCED YOU CAN GET THE TOR(onion) ADDRESS TO ADD TO YOUR COLD WALLET masternode.conf as server address with:${NC}\n"
 printf "${WHITE}$ sudo docker container exec apr-tor grep AddLocal /home/transcendence/.transcendence/debug.log${NC}\n"
 printf "${YELLOW}THE ABOVE COMMAND SHOULD OUTPUT SOMETHING LIKE THIS EXAMPLE OUTPUT:${NC}\n"
-printf "${WHITE}2019-11-24 02:33:16 AddLocal(zsddfken27kdsdx.onion:8051,4)${NC}\n"
-printf "${YELLOW}in this example you would add ${GREEN}zsddfken27kdsdx.onion:8051${YELLOW} to your cold wallet masternode.conf as ip addr for this alias. Yours will be different than the example.${NC}\n"
-printf "${RED}IMPORTANT: IF YOU ARE RUNNING A FIREWALL MAKE SURE TO ALLOW PORT 8051/TCP FOR transcendenced${NC}\n"
+printf "${WHITE}2019-11-24 02:33:16 AddLocal(zsddfken27kdsdx.onion:$PORTNUMBER,4)${NC}\n"
+printf "${YELLOW}in this example you would add ${GREEN}zsddfken27kdsdx.onion:$PORTNUMBER${YELLOW} to your cold wallet masternode.conf as ip addr for this alias. Yours will be different than the example.${NC}\n"
+printf "${RED}IMPORTANT: IF YOU ARE RUNNING A FIREWALL MAKE SURE TO ALLOW PORT $PORTNUMBER/TCP FOR transcendenced${NC}\n"
 printf "${YELLOW}Tips for the developer:${NC}\n"
 printf "${YELLOW}BTC: 3HLx5AMe9S5SWzVqLwAib3oyGZm5nAAWKe${NC}\n"
 printf "${YELLOW}TELOS: GPbuPVWKMKBYghszKi8N2iBCJgufmu3Li2${NC}\n"
