@@ -133,7 +133,7 @@ sed -i "s/masternodeprivkey=/masternodeprivkey=$MASTERNODEPRIVKEY/g" transcenden
 sed -i "s/masternodeaddr=/masternodeaddr=$MASTERNODEADDR/g" transcendence.conf
 sed -i "s/rpcuser=/rpcuser=$RPCUSER/g" transcendence.conf
 sed -i "s/rpcpassword=/rpcpassword=$RPCPASSWORD/g" transcendence.conf
-sed -i "s/port=/port=$PORTNUMBER/g" transcendence.conf
+sed -i "s/^port=/port=$PORTNUMBER/g" transcendence.conf
 #
 #
 #Edit Dockerfile
