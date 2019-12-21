@@ -25,6 +25,9 @@ torpassword in transcendence.conf is set to "decentralization" and should be cha
 Make sure to allow port 8051/tcp(or whatever port you specify to run the masternode on in the installer) in your hosts firewall(not within the container), this can usually be accomplished with:<br>
 sudo ufw allow 8051/tcp<br>
 <br>
+Description of encrypted/anonymized DNS linkage:<br>
+Stubby is a small DNS stub resolver that uses TLS to encrypt its lookups when queried. I have configured Stubby to use proxychains4 which passes the query to a SOCKS5 proxy, being Tor. So any DNS queries within the container are encrypted locally with stubby and the lookup is done encrypted and anonymized over Tor.<br>
+<br>
 Was this a helpful installer?<br>
 feel free to drop me a tip..<br>
 BTC: 3HLx5AMe9S5SWzVqLwAib3oyGZm5nAAWKe<br>
