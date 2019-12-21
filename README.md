@@ -34,5 +34,7 @@ TELOS: GPbuPVWKMKBYghszKi8N2iBCJgufmu3Li2<br>
 <b>Relevant links:</b><br>
 <b>S6-INIT:</b> https://skarnet.org/software/s6/ <br>
 <b>Tor:</b> https://www.torproject.org/ <br>
+<b>Stubby:</b> https://dnsprivacy.org/wiki/display/DP/DNS+Privacy+Daemon+-+Stubby <br>
+<b>Proxychains4:</b> https://github.com/rofl0r/proxychains-ng <br>
 <b>TELOS Coin:</b> https://teloscoin.org/ <br>
 <b>Docker:</b> https://www.docker.com/ <br>
