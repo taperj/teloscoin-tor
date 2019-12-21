@@ -4,7 +4,7 @@
 #                                                  #
 #  https://github.com/taperj/teloscoin-tor         #
 #                                                  #
-#  V. 0.0.2                                        #
+#  V. 0.0.3                                        #
 #                                                  #
 #  By: taperj                                      #
 #                                                  #
@@ -38,7 +38,7 @@ read MASTERNODEPRIVKEY
 #
 #Get masternode's public ip
 #
-printf "${WHITE}Detecting Public IP..."
+printf "${WHITE}Detecting Public IP...${NC}\n"
 #
 #Check for cURL
 if ! [ -x "$(command -v curl)" ]; then
@@ -156,7 +156,7 @@ docker create --name telos-tor-$PORTNUMBER --restart=always -p $PORTNUMBER:$PORT
 #
 printf "${YELLOW}Starting container telos-tor...${NC}\n"
 docker container start telos-tor-$PORTNUMBER
-sleep 4
+sleep 10
 docker ps
 printf "${GREEN}INSTALLATION COMPLETE.${NC}\n"
 printf "${YELLOW}ONCE SYNCED YOU CAN GET THE TOR(onion) ADDRESS TO ADD TO YOUR COLD WALLET masternode.conf as server address with:${NC}\n"
