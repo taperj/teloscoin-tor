@@ -1,8 +1,8 @@
 # teloscoin-tor
-docker container: Telos Coin masternode with Tor
+docker container: Telos Coin masternode with Tor and Stubby
 
 Description and purpose:
-This repository is a contribution as a resource to easily build a docker image and create a container that contains a hot TELOS Coin wallet configured to run as a masternode, transcendenced uses Tor to connect to the network for privacy and anonymity. Tor is also contained within the container making this an all-in-one solution using s6-init to run multiple processes in the same container. The linkage between transcendenced and the local Tor is configured on build of the image. All of the processes within the container have been set up to run as their proper non-privileged users. Tor runs as user debian-tor within the container and transcendenced runs as user transcendence. The image is based on ubuntu 16.04 and the Dockerfile will pull this image as a base on build.
+This repository is a contribution as a resource to easily build a docker image and create a container that contains a hot TELOS Coin wallet configured to run as a masternode, transcendenced uses Tor to connect to the network for privacy and anonymity and all dns queries are encrypted and anonymized using Stubby/Proxychains4/Tor. Tor/Stubby are contained within the container with Transcendenced making this an all-in-one solution using s6-init to run multiple processes in the same container. The linkage between transcendenced and the local Tor is configured on build of the image. Tor runs as user debian-tor within the container and transcendenced runs as user transcendence. The image is based on ubuntu 18.04 and the Dockerfile will pull this image as a base on build.
 
 <b>BUILD INFO</b><br>
 Steps to install:<br>
