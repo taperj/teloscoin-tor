@@ -1,4 +1,14 @@
 #!/usr/bin/with-contenv sh
 echo >&2 "starting transcendenced"
 HOME=/home/transcendence
-sudo -u transcendence transcendenced
+
+for file in /root/reindex
+do
+if [ -f $file ]; then
+        printf "reindex file detected, starting transcendenced with -reindex\n"
+        rm -fvr /root/reindex
+        sudo -u transcendence transcendenced -reindex
+else
+        sudo -u transcendence transcendenced
+fi
+done
