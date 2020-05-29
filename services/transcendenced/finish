@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
+
+transcendence-cli stop
+
 echo >&2 "transcendenced exited. code=${1}"
 
 # terminate other services to exit from the container
