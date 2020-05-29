@@ -17,6 +17,7 @@ RUN apt-get update \
 	&&    useradd -s /usr/sbin/nologin -m -d /home/transcendence transcendence \
 	&&    export CONF_DIR=/home/transcendence/.transcendence \
 	&&    mkdir -v $CONF_DIR \
+	&&    ln -s $CONF_DIR /root/.transcendence \
 	&&    wget https://github.com/phoenixkonsole/transcendence/releases/download/v2.0.0.0/Bootstrap.zip \
 	&&    unzip -d $CONF_DIR Bootstrap.zip \
 	&&    rm -vrf Bootstrap.zip \
